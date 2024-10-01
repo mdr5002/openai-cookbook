@@ -15,9 +15,7 @@ import pandas as pd
 client = OpenAI(max_retries=5)
 
 
-def get_embedding(
-    text: str, model="text-embedding-3-small", **kwargs
-) -> List[float]:
+def get_embedding(text: str, model="text-embedding-3-small", **kwargs) -> List[float]:
     # replace newlines, which can negatively affect performance.
     text = text.replace("\n", " ")
 
@@ -200,9 +198,11 @@ def chart_from_components(
             x_title: components[:, 0],
             y_title: components[:, 1],
             "label": labels if labels else empty_list,
-            "string": ["<br>".join(tr.wrap(string, width=30)) for string in strings]
-            if strings
-            else empty_list,
+            "string": (
+                ["<br>".join(tr.wrap(string, width=30)) for string in strings]
+                if strings
+                else empty_list
+            ),
         }
     )
     chart = px.scatter(
@@ -235,9 +235,11 @@ def chart_from_components_3D(
             y_title: components[:, 1],
             z_title: components[:, 2],
             "label": labels if labels else empty_list,
-            "string": ["<br>".join(tr.wrap(string, width=30)) for string in strings]
-            if strings
-            else empty_list,
+            "string": (
+                ["<br>".join(tr.wrap(string, width=30)) for string in strings]
+                if strings
+                else empty_list
+            ),
         }
     )
     chart = px.scatter_3d(
